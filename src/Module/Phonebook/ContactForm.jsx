@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
-import css from '../App.module.css';
+import css from './ContactForm.module.css'
 
 const INITIAL_STATE = {
   name: '',

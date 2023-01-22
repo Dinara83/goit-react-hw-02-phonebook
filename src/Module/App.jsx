@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ContactForm from './Phonebook/ContactForm';
-import Filter from './Contacts/Filter';
+import Filter from './Filter/Filter';
 import ContactList from './Contacts/ContactList';
 import initialContacts from '../contacts.json';
 import css from './App.module.css';

@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import css from '../App.module.css';
+import css from './Filter.module.css';
 
 const Filter = ({ value, onChange }) => {
   return (
     <form className={css.wrapperFilter}>
-      <label className={css.label}>Find contacts by name</label>
+      <label className={css.labelFilter}>Find contacts by name</label>
       <input
-        className={css.input}
+        className={css.inputFilter}
         type="text"
         name="filter"
         value={value}
