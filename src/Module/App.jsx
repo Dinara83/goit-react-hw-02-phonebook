@@ -1,45 +1,68 @@
 import React, { Component } from 'react';
 import ContactForm from './Phonebook/ContactForm';
+import Filter from './Contacts/Filter';
+import ContactList from './Contacts/ContactList';
+import initialContacts from '../contacts.json';
 import './App.module.css';
+import { nanoid } from 'nanoid';
 
 class App extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    contacts: initialContacts,
     filter: '',
   };
 
-  formSubmitHandler = data => {
-    console.log(data);
+  addFormSubmitContact = ({ name, number}) => {
+  const { contacts } = this.state;
+    const newContact = {
+      id: nanoid(),
+      name,
+      number,
+    }
+    if (contacts.find(contact => contact.name === newContact.name)) {
+      alert(`${newContact.name} is already in contacts.`)
+      return;
+    }
+
+    this.setState(({ contacts }) => ({
+      contacts: [newContact, ...contacts],
+    }));
+  };
+
+  getfilterContacts = () => {
+    const { filter, contacts } = this.state;
+    const normalizedContact = filter.toLowerCase();
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedContact)
+    );
+  };
+
+  deleteContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+    }));
+  };
+
+  changeFilter = evt => {
+    this.setState({ filter: evt.currentTarget.value });
   };
 
   render() {
+    const { filter } = this.state;
     return (
       <div>
         <h1>Phonebook</h1>
-        <ContactForm onSubmit={this.formSubmitHandler} />
+        <ContactForm onSubmit={this.addFormSubmitContact} />
+
         <h2>Contacts</h2>
-        <ul>
-          <li>Eden Clements: 645-17-79</li>
-          <li>Hermione Kline: 443-89-12</li>
-          <li>Rosie Simpson: 459-12-56</li>
-        </ul>
+        <Filter value={filter} onChange={this.changeFilter} />
+        <ContactList
+          contacts={this.getfilterContacts()}
+          onDeleteContact={this.deleteContact}
+        />
       </div>
     );
   }
 }
 
 export default App;
-
-// <div>
-//  <h1>Phonebook</h1>
-//  <ContactForm ... />
-
-//  <h2>Contacts</h2>
-//  <Filter ... />
-//  <ContactList ... />
-// </div>

@@ -1,42 +1,46 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import css from '../App.module.css';
 
+const INITIAL_STATE = {
+  name: '',
+  number: '',
+};
 class ContactForm extends Component {
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+  };
+
+  state = { INITIAL_STATE };
+
   nameInputId = nanoid();
   numberInputId = nanoid();
 
-  state = {
-    name: '',
-    number: '',
-  };
-
   handleChange = evt => {
     const { name, value } = evt.currentTarget;
-
     this.setState({ [name]: value });
   };
 
   handleSubmit = evt => {
     evt.preventDefault();
-    //   const { login, email, password } = this.state;
-    //   console.log(`Login: ${login}, Email: ${email}, Password: ${password}`);
-    //   this.props.onSubmit({ ...this.state });
-    this.reset();
     this.props.onSubmit(this.state);
+    this.reset();
   };
 
   reset = () => {
-    this.setState({ name: '', number: '' });
+    this.setState({ ...INITIAL_STATE });
   };
 
   render() {
+    const { name, number } = this.state;
     return (
       <form className={css.wrapper} onSubmit={this.handleSubmit}>
         <label htmlFor={this.nameInputId}>Name</label>
         <div>
           <input
             id={this.nameInputId}
+            value={name}
             type="text"
             name="name"
             onChange={this.handleChange}
@@ -48,6 +52,7 @@ class ContactForm extends Component {
           <label htmlFor={this.numberInputId}>Number</label>
           <input
             id={this.numberInputId}
+            value={number}
             type="tel"
             name="number"
             onChange={this.handleChange}

@@ -1,8 +1,7 @@
 .wrapper {
-	width: 400px;
-	padding: 10px;
-	border: 1px solid black;
-	text-align: center;
+	/* width: 400px; */
+	padding: 15px;
+	border: 1px solid;
 }
 
 label {
@@ -27,4 +26,4 @@ input {
 	align-items: center;
 	flex-direction: column;
 	padding: 10px 0;
-	width: 100%; */
+	width: 100%; */ ;
