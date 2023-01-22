@@ -3,7 +3,7 @@ import ContactForm from './Phonebook/ContactForm';
 import Filter from './Contacts/Filter';
 import ContactList from './Contacts/ContactList';
 import initialContacts from '../contacts.json';
-import './App.module.css';
+import css from './App.module.css';
 import { nanoid } from 'nanoid';
 
 class App extends Component {
@@ -12,15 +12,15 @@ class App extends Component {
     filter: '',
   };
 
-  addFormSubmitContact = ({ name, number}) => {
-  const { contacts } = this.state;
+  addFormSubmitContact = ({ name, number }) => {
+    const { contacts } = this.state;
     const newContact = {
       id: nanoid(),
       name,
       number,
-    }
+    };
     if (contacts.find(contact => contact.name === newContact.name)) {
-      alert(`${newContact.name} is already in contacts.`)
+      alert(`${newContact.name} is already in contacts.`);
       return;
     }
 
@@ -50,7 +50,7 @@ class App extends Component {
   render() {
     const { filter } = this.state;
     return (
-      <div>
+      <div className={css.conteinerPhonebook}>
         <h1>Phonebook</h1>
         <ContactForm onSubmit={this.addFormSubmitContact} />
 
