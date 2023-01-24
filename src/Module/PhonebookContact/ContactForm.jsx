@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
+
 import PropTypes from 'prop-types';
-import { nanoid } from 'nanoid';
-import css from './ContactForm.module.css'
+
+import css from './contact-form.module.css';
 
 const INITIAL_STATE = {
   name: '',
@@ -14,54 +15,49 @@ class ContactForm extends Component {
 
   state = { INITIAL_STATE };
 
-  nameInputId = nanoid();
-  numberInputId = nanoid();
-
-  handleChange = evt => {
-    const { name, value } = evt.currentTarget;
-    this.setState({ [name]: value });
-  };
-
   handleSubmit = evt => {
     evt.preventDefault();
-    console.log(evt);
-    this.props.onSubmit(this.state);
-    this.reset();
+    const { onSubmit } = this.props;
+    const result = onSubmit({ ...this.state });
+    if (result) {
+      this.reset();
+    }
   };
 
   reset = () => {
     this.setState({ ...INITIAL_STATE });
   };
 
+  handleChange = evt => {
+    const { name, value } = evt.currentTarget;
+    this.setState({ [name]: value });
+  };
+
   render() {
+    const { handleChange, handleSubmit } = this;
     const { name, number } = this.state;
+
     return (
-      <form className={css.wrapper} onSubmit={this.handleSubmit}>
-        <label htmlFor={this.nameInputId} className={css.label}>
-          Name
-        </label>
+      <form className={css.wrapper} onSubmit={handleSubmit}>
+        <label className={css.label}>Name</label>
         <input
           className={css.input}
-          id={this.nameInputId}
           value={name}
           type="text"
           name="name"
-          onChange={this.handleChange}
+          onChange={handleChange}
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
         />
 
-        <label htmlFor={this.numberInputId} className={css.label}>
-          Number
-        </label>
+        <label className={css.label}>Number</label>
         <input
           className={css.input}
-          id={this.numberInputId}
           value={number}
           type="tel"
           name="number"
-          onChange={this.handleChange}
+          onChange={handleChange}
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
@@ -73,4 +69,5 @@ class ContactForm extends Component {
     );
   }
 }
+
 export default ContactForm;

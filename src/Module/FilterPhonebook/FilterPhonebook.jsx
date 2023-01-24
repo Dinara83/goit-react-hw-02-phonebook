@@ -1,8 +1,8 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import css from './Filter.module.css';
 
-const Filter = ({ value, onChange }) => {
+import css from './filter-phonebook.module.css';
+
+const FilterPhonebook = ({ value, onChange }) => {
   return (
     <form className={css.wrapperFilter}>
       <label className={css.labelFilter}>Find contacts by name</label>
@@ -17,9 +17,9 @@ const Filter = ({ value, onChange }) => {
   );
 };
 
-export default Filter;
-
-Filter.propTypes = {
+FilterPhonebook.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };
+
+export default FilterPhonebook;
