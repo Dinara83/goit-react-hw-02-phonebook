@@ -6,7 +6,7 @@ import FilterPhonebook from './FilterPhonebook/FilterPhonebook';
 import ContactList from './Contacts/ContactList';
 
 import initialContacts from '../contacts.json';
-import css from './app.module.css';
+import css from './App.module.css';
 
 class App extends Component {
   state = {
@@ -73,7 +73,7 @@ class App extends Component {
       );
     });
     return result;
-  };
+  }
 
   render() {
     const { filter } = this.state;
