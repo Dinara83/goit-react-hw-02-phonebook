@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 import css from './filter-phonebook.module.css';
 
-const FilterPhonebook = ({ value, onChange }) => {
+const FilterPhonebook = ({ onChange }) => {
   return (
     <form className={css.wrapperFilter}>
       <label className={css.labelFilter}>Find contacts by name</label>
@@ -10,7 +10,6 @@ const FilterPhonebook = ({ value, onChange }) => {
         className={css.inputFilter}
         type="text"
         name="filter"
-        value={value}
         onChange={onChange}
       />
     </form>
@@ -18,7 +17,6 @@ const FilterPhonebook = ({ value, onChange }) => {
 };
 
 FilterPhonebook.propTypes = {
-  value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 

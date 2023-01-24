@@ -76,7 +76,6 @@ class App extends Component {
   }
 
   render() {
-    const { filter } = this.state;
     const contacts = this.getfilterContacts();
     const { addFormSubmitContact, changeFilter, removeContact } = this;
 
@@ -86,7 +85,7 @@ class App extends Component {
         <ContactForm onSubmit={addFormSubmitContact} />
 
         <h2>Contacts</h2>
-        <FilterPhonebook value={filter} onChange={changeFilter} />
+        <FilterPhonebook onChange={changeFilter} />
         <ContactList contacts={contacts} onDeleteContact={removeContact} />
       </div>
     );
