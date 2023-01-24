@@ -60,7 +60,7 @@ class App extends Component {
     this.setState({ filter: target.value });
   };
 
-  getfilterContacts = () => {
+  getfilterContacts() {
     const { filter, contacts } = this.state;
     if (!filter) {
       return contacts;
