@@ -4,7 +4,7 @@ import css from './contact-list-item.module.css';
 
 const ContactListItem = ({ id, name, number, deleteContact }) => {
   return (
-    <li key={id} className={css.contactsItem}>
+    <li className={css.contactsItem}>
       <span className={css.contactsText}>
         {name}: {number}
       </span>

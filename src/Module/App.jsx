@@ -21,7 +21,7 @@ class App extends Component {
   };
 
   addFormSubmitContact = ({ name, number }) => {
-    if (this.isDublicate(name, number)) {
+    if (this.isDublicate(name)) {
       alert(`${name} is already in contacts.`);
       return false;
     }
@@ -41,16 +41,12 @@ class App extends Component {
     return true;
   };
 
-  isDublicate(name, number) {
+  isDublicate(name) {
     const normalizedName = name.toLowerCase();
-    const normalizedNumber = number.toLowerCase();
     const { contacts } = this.state;
 
-    const result = contacts.find(({ name, number }) => {
-      return (
-        name.toLowerCase() === normalizedName &&
-        number.toLowerCase() === normalizedNumber
-      );
+    const result = contacts.find(({ name }) => {
+      return name.toLowerCase() === normalizedName;
     });
 
     return Boolean(result);
